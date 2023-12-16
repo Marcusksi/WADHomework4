@@ -84,7 +84,6 @@ button{
 }
 .nav-links{
   margin: 10px;
-  padding-right: 40px;
 }
 nav{
   text-align: center;
