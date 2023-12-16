@@ -5,14 +5,22 @@ import AddPost from "../views/AddPost.vue";
 import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 import Contacts from "../views/Contacts.vue";
+import auth from "../auth";
 
 
-
-const routes = [{
-        path: '/',
-        name: 'AllPosts',
-        component: () =>
-            import ("../views/AllPosts.vue")
+const routes = [
+    {
+        path: "/",
+        name: "home",
+        component: AllPosts,
+        beforeEnter: async(to, from, next) => {
+            let authResult = await auth.authenticated();
+            if (!authResult) {
+                next('/api/login')
+            } else {
+                next();
+            }
+        }
     },
     {
         path: "/api/allposts",
@@ -44,11 +52,6 @@ const routes = [{
         name: "LogIn",
         component: LogIn,
     },
-    { //will route to AllPosts view if none of the previous routes apply
-        path: "/:catchAll(.*)",
-        name: "AllPosts",
-        component: AllPosts,
-    }
 ]
 
 const router = createRouter({

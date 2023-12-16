@@ -2,11 +2,9 @@
   <div>
 
     <nav>
-      <router-link to="/api/allposts">Home</router-link> |
-      <router-link to="/api/contacts">Contacts</router-link> |
-      <router-link to="/api/addpost">Add a Post (temporary)</router-link> |
-      <router-link to="/api/signup">SignUp (temporary)</router-link> |
-      <router-link to="/api/login">Login (temporary)</router-link>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/api/contacts">Contacts</router-link>
+      
     </nav>
     <router-view />
   
@@ -18,25 +16,10 @@
 export default {
   name: "App",
    methods: {
-    Logout() {
-      fetch("http://localhost:3000/auth/logout", {
-          credentials: 'include', //  Don't forget to specify this if you need cookies
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        console.log('jwt removed');
-        //console.log('jwt removed:' + auth.authenticated());
-        this.$router.push("/login");
-        //location.assign("/");
-      })
-      .catch((e) => {
-        console.log(e);
-        console.log("error logout");
-      });
-    },
-  }, 
-};
+   
+   },
+}; 
+
 </script>
 
 <style>

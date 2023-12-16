@@ -27,6 +27,24 @@ export default {
     };
   },
   methods: {
+    //logout method
+    Logout() {
+      fetch("http://localhost:3000/auth/logout", {
+          credentials: 'include', 
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log('jwt removed');
+        
+        this.$router.push("/api/login");
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log("error logout");
+      });
+    },
+
     fetchPosts() {
       fetch(`http://localhost:3000/api/posts/`)
         .then((response) => response.json())

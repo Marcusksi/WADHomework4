@@ -1,9 +1,10 @@
 <template>
   <div class="form">
     <h3>SignUp</h3>
-    <label for="email">Email</label>
+    <label for="email">Email:</label>
     <input type="email" name="email"  required v-model="email">
-    <label for="password">Password</label>
+    <div v-if="emailExists">{{emailExists}} </div>
+    <label for="password">Password:</label>
     <input type="password" name="password" required v-model="password">
     <div v-if="errMsg">{{errMsg}} </div>
     <button @click="SignUp" class="SignUp">SignUp</button>
@@ -17,6 +18,7 @@ data: function() {
     return {
    email: '',
    password: '',
+   emailExists: '',
    errMsg: '',
   }
   },
@@ -37,8 +39,9 @@ validatePassword(value) {
 SignUp() {
       var data = {
         email: this.email,
-        password: this.password
+        password: this.password,
       };
+      this.emailExists = "Account with this email already exists";
       fetch("http://localhost:3000/auth/signup", {
         method: "POST",
         headers: {
@@ -65,7 +68,7 @@ SignUp() {
 .form {
   max-width: 420px;
   margin: 30px auto;
-  background: rgb(167, 154, 154);
+  background-color: #8FC1E3;
   text-align: left;
   padding: 40px;
   border-radius: 10px;
@@ -93,14 +96,21 @@ input {
   color: blue;
 }
 button {
-  background: rgb(8, 110, 110);
+  background-color: #496342;
   border: 0;
   padding: 10px 20px;
-  margin-top: 20px;
   color: white;
   border-radius: 20px;
   align-items: center;
   text-align: center;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+button:hover{
+    opacity: 0.9;
+    cursor:pointer;
+    background-color: #7a9673;
 }
 div {
   padding: 10px 20px;

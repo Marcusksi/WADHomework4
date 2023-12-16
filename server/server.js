@@ -25,7 +25,7 @@ app.post('/api/posts', async(req, res) => {
         console.log("a post request has arrived");
         const post = req.body;
         const newpost = await pool.query(
-            "INSERT INTO posttable(date, body) values ($1, $2)    RETURNING*", [post.date, post.body]
+            "INSERT INTO posttable(title, body, urllink) values ($1, $2, $3)    RETURNING*", [post.title, post.body, post.urllink]
         );
         res.json(newpost);
     } catch (err) {
@@ -37,7 +37,7 @@ app.get('/api/posts', async(req, res) => {
     try {
         console.log("get posts request has arrived");
         const posts = await pool.query(
-            "SELECT * FROM posttable ORDER BY id DESC"
+            "SELECT * FROM posttable"
         );
         res.json(posts.rows);
     } catch (err) {
@@ -64,7 +64,7 @@ app.put('/api/posts/:id', async(req, res) => {
         const post = req.body;
         console.log("update request has arrived");
         const updatepost = await pool.query(
-            "UPDATE posttable SET (date, body) = ($2, $3) WHERE id = $1 RETURNING*", [id, post.date, post.body]
+            "UPDATE posttable SET (title, body, urllink) = ($2, $3, $4) WHERE id = $1 RETURNING*", [id, post.title, post.body, post.urllink]
         );
         res.json(updatepost);
     } catch (err) {
@@ -90,6 +90,12 @@ app.post('/auth/signup', async(req, res) => {
     try {
         console.log("a signup request has arrived");
         const { email, password } = req.body;
+
+        const user = await pool.query("SELECT * FROM users WHERE email = $1", [req.body.email]);
+        if(user.rows.length>0){
+            return res.status(401).json({ error: "Email exists"})
+        }
+
         const salt = await bcrypt.genSalt();
         const bcryptPassword = await bcrypt.hash(password, salt)
         const authUser = await pool.query(
@@ -135,3 +141,33 @@ app.get('/auth/logout', (req, res) => {
 app.listen(port, () => {
     console.log("Server is listening to port " + port)
 });
+
+
+app.get('/auth/authenticate', async(req, res) => {
+    console.log('authentication request has been arrived');
+    const token = req.cookies.jwt; 
+   
+    let authenticated = false; 
+    try {
+        if (token) { 
+            await jwt.verify(token, secret, (err) => { 
+                if (err) { 
+                    console.log(err.message);
+                    console.log('token is not verified');
+                    res.send({ "authenticated": authenticated }); 
+                } else {
+                    console.log('author is authinticated');
+                    authenticated = true;
+                    res.send({ "authenticated": authenticated }); 
+                }
+            })
+        } else { 
+            console.log('author is not authinticated');
+            res.send({ "authenticated": authenticated }); 
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+});
+
