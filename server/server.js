@@ -85,6 +85,19 @@ app.delete('/api/posts/:id', async(req, res) => {
     }
 });
 
+app.delete('/api/posts', async(req, res) => {
+    try {
+        const { id } = req.params;
+        console.log("delete all posts request has arrived");
+        const deletepost = await pool.query(
+            "DELETE FROM posttable"
+        );
+        res.json(deletepost);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 
 app.post('/auth/signup', async(req, res) => {
     try {

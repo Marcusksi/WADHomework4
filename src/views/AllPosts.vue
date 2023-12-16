@@ -1,19 +1,16 @@
 <template>
   <div class="AllPosts">
-    <div id="post-list">
-    <h1>All Posts</h1>
-     <div class="container">
-    <button   @click="Logout" class="center">Logout</button>
+    <button @click="Logout" class="btn">Logout</button>
+    <div class="box" v-for="post in posts" :key="post.id">
+      <a class= 'singlepost' :href="'/api/apost/' + post.id">
+        <ul class="post">
+          <li><p class="date">{{post.date}}</p></li>
+          <p>{{post.body}}</p> 
+        </ul> 
+    </a> 
     </div>
-      <ul>
-        <div class="item" v-for="post in posts" :key="post.id">
-            <a class= 'singlepost' :href="'/api/apost/' + post.id">
-            <span class="date"> <b>Date:</b> {{ post.date }}  </span><br />
-            <span class="body"> <b>Body:</b> {{ post.body }} </span> <br />
-          </a>
-        </div>
-      </ul>
-    </div>
+    <button @click="ToAddPost" class="btn" >Add post</button>
+    <button @click="DeleteAllPosts" class="btn">Delete all</button>
   </div>
 </template>
 
@@ -51,6 +48,26 @@ export default {
         .then((data) => (this.posts = data))
         .catch((err) => console.log(err.message));
     },
+
+
+    ToAddPost() {
+      this.$router.push("/api/addpost");
+    },
+
+    DeleteAllPosts() {
+      fetch(`http://localhost:3000/api/posts/`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => {
+          console.log(response.data);
+          window.location.reload();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+
   },
   mounted() {
     this.fetchPosts();
@@ -60,38 +77,79 @@ export default {
 </script>
 
 <style scoped>
-h1 {
+ul {
+    list-style: none;
+}
+
+.box {
+  display: flex;
+}
+
+.singlepost {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  padding: 10px;
+  background-color: #8FC1E3;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  text-align: left;
+}
+
+p {
+  color:black;
+}
+
+.date {
+  text-align: right;
   font-size: 20px;
 }
-a {
-  text-decoration: none;
+
+
+
+  
+@keyframes likeUpDown {
+    from, to {
+        transform: translateY(-20px);
+      }
+    50% {
+        transform: translateY(20px);
+    }
 }
-a:hover {
-  text-decoration: underline;
+
+@media (min-width: 800px) {
+    .box {
+        margin-left: 0%;
+        margin-right: 0%;
+    }
 }
-.item {
-  background: rgb(189, 212, 199);
-  margin-bottom: 5px;
-  padding: 3px 5px;
-  border-radius: 10px;
+
+@media (min-width: 1000px) {
+    .box {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
 }
-#post-list {
-  background: #6e8b97;
-  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
-  margin-bottom: 30px;
-  padding: 10px 20px;
-  margin: auto;
-  width: 50%;
-  border-radius: 20px;
+
+li ~ p {
+    font-size: 22px;
 }
-#post-list ul {
-  padding: 0;
+
+.btn{
+    background-color: #496342;
+    color: black;
+    margin: 10px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
-#post-list li {
-  display: inline-block;
-  margin-right: 10px;
-  margin-top: 10px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.7);
+.btn:hover{
+    opacity: 0.9;
+    cursor:pointer;
+    background-color: #7a9673;
 }
+
 </style>
