@@ -2,10 +2,11 @@
   <div>
 
     <nav>
-      <router-link to="/api/allposts">Posts</router-link> |
-      <router-link to="/api/addpost">Add a Post</router-link> |
-      <router-link to="/api/signup">SignUp</router-link>|
-      <router-link to="/api/login">Login</router-link>
+      <router-link to="/api/allposts">Home</router-link> |
+      <router-link to="/api/contacts">Contacts</router-link> |
+      <router-link to="/api/addpost">Add a Post (temporary)</router-link> |
+      <router-link to="/api/signup">SignUp (temporary)</router-link> |
+      <router-link to="/api/login">Login (temporary)</router-link>
     </nav>
     <router-view />
   

@@ -1,4 +1,4 @@
-# Lec14-testing-cypress
+# WAD Homework 4
 
 ## Project setup
 ```
@@ -20,15 +20,3 @@ npm run server
 npm run serve
 ```
 
-### Open Cypress 
-```
-npx cypress open
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
