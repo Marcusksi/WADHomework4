@@ -22,11 +22,12 @@ const routes = [
             }
         }
     },
-    {
+    /*{ 
         path: "/api/allposts",
         name: "AllPosts",
         component: AllPosts,
     },
+    */
     {
         path: "/api/contacts",
         name: "Contacts",
@@ -41,6 +42,14 @@ const routes = [
         path: "/api/addpost",
         name: "AddPost",
         component: AddPost,
+        beforeEnter: async(to, from, next) => {
+            let authResult = await auth.authenticated();
+            if (!authResult) {
+                next('/api/login')
+            } else {
+                next();
+            }
+        }
     },
     {
         path: "/api/signup",
