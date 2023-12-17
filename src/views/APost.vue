@@ -107,6 +107,11 @@ button {
   color: white;
   border-radius: 20px;
 }
+button:hover{
+    opacity: 0.9;
+    cursor:pointer;
+    background-color: #7a9673;
+}
 .container {
   display: flex;
   justify-content: center;

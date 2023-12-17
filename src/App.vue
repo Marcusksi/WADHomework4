@@ -74,10 +74,8 @@ button{
   width: 100%;
   padding-bottom: 7px;
   padding-top: 5px;
-  overflow-x: hidden;
 }
 .content{
-  width: 100%;  
   padding-bottom: 10px;
   padding-top: 15px;
   list-style: none;
