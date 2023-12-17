@@ -1,4 +1,6 @@
 <template>
+  <div id="page-container">
+    <div id="content-wrap">
   <div class="header">
     <ul class="content">
       <li class="nav-links">
@@ -10,8 +12,9 @@
       </li>
     </ul>
   </div>
+  
   <router-view />
-
+  </div>
   <footer class="footer">
     <div class="container">
       <div class="footer-bottom">
@@ -19,6 +22,7 @@
       </div>
     </div>
   </footer>
+</div>
 </template>
 
 <script>
@@ -55,6 +59,16 @@ button{
   display: flex;
   justify-content: center;
 }
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 5rem;    /* Footer height */
+}
+
 .footer {
     color: #F7F9FB;
     background-color: #687864;
@@ -63,7 +77,7 @@ button{
     padding-bottom: 7px;
     padding-top: 5px;
     text-align: center;
-    position: relative;
+    position: absolute;
     bottom: 0;
   }
 
@@ -79,16 +93,17 @@ button{
   padding-bottom: 10px;
   padding-top: 15px;
   list-style: none;
+  padding-left: 0px;
 }
 .nav-links{
-  margin: 10px;
+  margin:10px;
 }
 nav{
   text-align: center;
   color: #2c3e50;
   font-weight: bold;
   text-decoration: none;
-  padding:0px;
+  padding: auto;
 }
 nav a {
   color: #2c3e50;
