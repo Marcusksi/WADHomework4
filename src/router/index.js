@@ -40,7 +40,7 @@ const routes = [
         name: "AllPosts",
         component: AllPosts,
     },
-    */
+    
     {
         path: "/api/contacts",
         name: "Contacts",

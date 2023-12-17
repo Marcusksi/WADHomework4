@@ -1,14 +1,18 @@
 <template>
-  <div class="A Post">
-    <div id="form">
-      <h3>A Post</h3>
-      <label for="body">Body: </label>
-      <input name="body" type="text" id="body" required v-model="post.body" />
+  <div class="form">
+    <h3>A Post</h3>
+    <div class="bodyDiv">
+      <div class="leftFlex">
+        <label for="body">Body </label>
+      </div>
+      <div class="rightFlex">
+        <input name="body" type="text" id="body" required v-model="post.body" />
+      </div>
     </div>
     <div class="container">
-      <button @click="updatePost" class="updatePost">Update Post</button>
-      <button @click="deletePost" class="deletePost">Delete Post</button>
-    </div>
+    <button @click="updatePost" class="btn">Update</button>
+    <button @click="deletePost" class="btn">Delete</button>
+  </div>
   </div>
 </template>
 
@@ -69,45 +73,87 @@ export default {
 </script>
 
 <style scoped>
-#form {
+.form {
   max-width: 420px;
   margin: 30px auto;
-  background: rgb(167, 154, 154);
+  background: #8FC1E3;
   text-align: left;
+  align-items: center;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: column;
   padding: 40px;
+  padding-top: 20px;
+  padding-bottom: 10px;
   border-radius: 10px;
 }
 h3 {
+  font-size: 24px;
   text-align: center;
-  color: rgb(8, 110, 110);
+  color: black;
+  font-weight: 300;
 }
+
+.bodyDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.leftFlex {
+  display: flex;
+  flex-direction: column;
+  flex: 30%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.rightFlex {
+  display: flex;
+  flex-direction: column;
+  flex: 70%;
+}
+
 label {
-  color: rgb(8, 110, 110);
-  display: inline-block;
-  margin: 25px 0 15px;
-  font-size: 0.8em;
-  text-transform: uppercase;
+  color: rgb(0, 0, 0);
   letter-spacing: 1px;
   font-weight: bold;
+  align-self: center;
+  justify-self: center;
+  font-size: 20px;
+  font-weight: 400;
 }
 input {
   display: block;
-  padding: 10px 6px;
   width: 100%;
-  box-sizing: border-box;
   border: none;
-  border-bottom: 1px solid white;
-  color: blue;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  line-height: 40px;
+  font-size: 20px;
+  text-align: center;
 }
-button {
-  background: rgb(8, 110, 110);
-  border: 0;
-  padding: 10px 20px;
-  margin-top: 20px;
-  color: white;
-  border-radius: 20px;
+
+::placeholder {
+   text-align: center; 
 }
-button:hover{
+
+.btn{
+    background-color: #496342;
+    color: black;
+    margin: 10px;
+    margin-top: 20px;
+    padding: 10px 30px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn:hover{
     opacity: 0.9;
     cursor:pointer;
     background-color: #7a9673;
