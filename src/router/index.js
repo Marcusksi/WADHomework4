@@ -23,6 +23,19 @@ const routes = [
         }
     },
     {
+        path: "/signup/home",
+        name: "signupToHome",
+        component: AllPosts,
+        beforeEnter: async(to, from, next) => {
+            let authResult = await auth.authenticated();
+            if (!authResult) {
+                next('/api/signup')
+            } else {
+                next();
+            }
+        }
+    },
+    {
         path: "/api/allposts",
         name: "AllPosts",
         component: AllPosts,
