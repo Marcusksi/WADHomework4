@@ -1,12 +1,18 @@
 <template>
   <div class="form">
     <h3>SignUp</h3>
-    <label for="email">Email:</label>
-    <input type="email" name="email"  required v-model="email">
+    <div class="formdiv">
+      <div class="subdiv">
+        <label for="email">Email:</label>
+        <input type="email" name="email"  required v-model="email" placeholder="Email">
+      </div>
     <div v-if="emailExists">{{emailExists}} </div>
-    <label for="password">Password:</label>
-    <input type="password" name="password" required v-model="password">
+      <div class="subdiv">
+        <label for="password">Password:</label>
+        <input type="password" name="password" required v-model="password" placeholder="Password">
+      </div>
     <div v-if="errMsg">{{errMsg}} </div>
+    </div>
     <button @click="SignUp" class="SignUp">SignUp</button>
   </div>
 </template>
@@ -75,14 +81,13 @@ SignUp() {
 }
 h3 {
   text-align: center;
-  color: rgb(8, 110, 110);
+  color: #2c3e50;
 }
 label {
-  color: rgb(8, 110, 110);
+  color: #2c3e50;
   display: inline-block;
   margin: 25px 0 15px;
   font-size: 0.8em;
-  text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
 }
@@ -93,7 +98,7 @@ input {
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid white;
-  color: blue;
+  color: #2c3e50;
 }
 button {
   background-color: #496342;
@@ -115,5 +120,22 @@ button:hover{
 div {
   padding: 10px 20px;
   margin-top: 20px;
+}
+
+.subdiv {
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+}
+input {
+  text-align: center;
+  border-radius: 10px;
+  margin-left: 30px;
+  width: 300px;
+}
+.formdiv {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 </style>
