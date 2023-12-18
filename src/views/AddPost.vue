@@ -122,7 +122,7 @@ input {
 
 .btn{
     background-color: #496342;
-    color: black;
+    color: white;
     margin: 10px;
     margin-top: 20px;
     padding: 10px 30px;

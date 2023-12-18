@@ -7,10 +7,12 @@
           <li><p class="date">{{post.date}}</p></li>
           <p>{{post.body}}</p> 
         </ul> 
-    </a> 
+      </a> 
     </div>
-    <button @click="ToAddPost" class="btn" >Add post</button>
-    <button @click="DeleteAllPosts" class="btn">Delete all</button>
+    <div>
+      <button @click="ToAddPost" class="btn" >Add post</button>
+      <button @click="DeleteAllPosts" class="btn">Delete all</button>
+    </div>
   </div>
 </template>
 
@@ -105,6 +107,7 @@ p {
 .date {
   text-align: right;
   font-size: 20px;
+  margin-right: 20px;
 }
 
 
@@ -135,12 +138,17 @@ p {
 
 li ~ p {
     font-size: 22px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    margin-right: 10px;
 }
 
 .btn{
     background-color: #496342;
-    color: black;
+    color: white;
     margin: 10px;
+    margin-top: 20px;
+    padding: 10px 30px;
     border: none;
     text-align: center;
     text-decoration: none;

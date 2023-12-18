@@ -46,7 +46,7 @@ export default {
       })
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/api/allposts");
+          this.$router.push("/");
         })
         .catch((e) => {
           console.log(e);
@@ -59,7 +59,7 @@ export default {
       })
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/api/allposts");
+          this.$router.push("/");
         })
         .catch((e) => {
           console.log(e);
@@ -144,7 +144,7 @@ input {
 
 .btn{
     background-color: #496342;
-    color: black;
+    color: white;
     margin: 10px;
     margin-top: 20px;
     padding: 10px 30px;
