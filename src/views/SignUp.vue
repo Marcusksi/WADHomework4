@@ -47,24 +47,29 @@ SignUp() {
         email: this.email,
         password: this.password,
       };
-      fetch("http://localhost:3000/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-          credentials: 'include', 
-          body: JSON.stringify(data),
-      })
-      .then((response) => response.json())
-      .then((data) => {
-      console.log(data);
-      this.$router.push("/signup/home");
-      this.emailExists = "Account with email '" + this.email +"' already exists";
-      })
-      .catch((e) => {
-        console.log(e);
-        console.log("error");
-      });
+      if(this.email === '' || this.password === ''){
+        this.errMsg = "Fill in all the fields"
+      }
+      else if(this.errMsg === ''){
+        fetch("http://localhost:3000/auth/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+            credentials: 'include', 
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+        console.log(data);
+        this.$router.push("/signup/home");
+        this.emailExists = "Account with email '" + this.email +"' already exists";
+        })
+        .catch((e) => {
+          console.log(e);
+          console.log("error");
+        });
+      }
     },
   }, 
   }
