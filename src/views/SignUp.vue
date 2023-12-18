@@ -47,7 +47,6 @@ SignUp() {
         email: this.email,
         password: this.password,
       };
-      this.emailExists = "Account with email '" + this.email +"' already exists";
       fetch("http://localhost:3000/auth/signup", {
         method: "POST",
         headers: {
@@ -60,6 +59,7 @@ SignUp() {
       .then((data) => {
       console.log(data);
       this.$router.push("/signup/home");
+      this.emailExists = "Account with email '" + this.email +"' already exists";
       })
       .catch((e) => {
         console.log(e);
