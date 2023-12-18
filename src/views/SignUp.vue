@@ -50,6 +50,9 @@ SignUp() {
       if(this.email === '' || this.password === ''){
         this.errMsg = "Fill in all the fields"
       }
+      else if (!this.email.includes('@') || !this.email.includes('.')){
+        this.errMsg = "Please enter a valid email address"
+      }
       else if(this.errMsg === ''){
         fetch("http://localhost:3000/auth/signup", {
           method: "POST",
