@@ -50,7 +50,7 @@ SignUp() {
       if(this.email === '' || this.password === ''){
         this.errMsg = "Fill in all the fields"
       }
-      else if (!this.email.includes('@') || !this.email.includes('.')){
+      else if (!this.email.includes('@')){
         this.errMsg = "Please enter a valid email address"
       }
       else if(this.errMsg === ''){

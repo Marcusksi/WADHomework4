@@ -11,6 +11,7 @@
       <input type="password" name="password" required v-model="password" placeholder="Password">
     </div>
     </div>
+    <div class="err" v-if="errMsg">{{errMsg}} </div>
     <div class="container">
       <button @click="LogIn"  class="center">LogIn</button>
       <p>Or</p>
@@ -26,6 +27,7 @@ data: function() {
     return {
    email: '',
    password: '',
+   errMsg: '',
   }
   },
   methods: {
@@ -34,23 +36,29 @@ LogIn() {
         email: this.email,
         password: this.password
       };
-      fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-          credentials: 'include', 
-          body: JSON.stringify(data),
-      })
-      .then((response) => response.json())
-      .then((data) => {
-      console.log(data);
-      location.assign("/");
-      })
-      .catch((e) => {
-        console.log(e);
-        console.log("error");
-      });
+      if (this.email === '' || this.password === '') {
+        this.errMsg = "Fill in all the fields"
+      }
+      else if (this.email !== '' || this.password !== '') {
+        fetch("http://localhost:3000/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+            credentials: 'include', 
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+        console.log(data);
+        location.assign("/");
+
+        })
+        .catch((e) => {
+          console.log(e);
+          console.log("error");
+        });
+      }
     },
   }, 
   }
@@ -131,5 +139,8 @@ input {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+}
+.err {
+  text-align: end;
 }
 </style>
